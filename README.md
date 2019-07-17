@@ -2,6 +2,10 @@
 
 ## Usage
 
+### NeoVim Plugin Location on Mac
+
+`~/.local/share/nvim/plugged`
+
 ### Plugin Manager
 
 Use [Vim-Plug](https://github.com/junegunn/vim-plug) as plugin manager. Install Vim-Plug first following instructions by the author of Vim-Plug.

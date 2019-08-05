@@ -16,6 +16,7 @@ Plug 'tpope/vim-repeat'
 
 " fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
 
 " file tree in current directory
 " <leader>dir to toggle
@@ -82,21 +83,20 @@ Plug 'sbdchd/neoformat'
 " end of plugins settings
 call plug#end()
 
-" map leader to <Space>
-let mapleader="\<SPACE>"
+" fundamental settings
+" use dracula theme as the color theme
+colorscheme dracula
 
 " improve neovim performance slightly
 set  nocursorcolumn
 set nocursorline
-" set norelativenumber
+
+" set layout format
 syntax sync minlines=256
 set synmaxcol=200
 set scrolljump=5
-
-" abosolute line number in normal mode
-" relative line number in insert mode
-autocmd InsertLeave * :set norelativenumber number
-autocmd InsertEnter * :set relativenumber
+" control whether highlight current line
+:hi CursorLine   cterm=NONE ctermbg=240 ctermfg=white guibg=188 guifg=white
 
 " file encoding
 set fileencoding=utf-8
@@ -106,33 +106,12 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 set tabstop=4
 set shiftwidth=4
 
-" shortcuts mapping
-
-" change <ESC> to jj
-imap jj <ESC>
-" <leader>f => popup the file tree navigation
-map <leader>dir :NERDTreeToggle<CR>
-" install plugin using vim-plug
-map <leader>pi :PlugInstall<CR>
-" Toggle tagbar
-nmap <leader>tag :TagbarToggle<CR>
-" visual shifting
-vnoremap < <gv
-vnoremap > >gv
-
-" fundamental settings
-
 " turn on line number
 set number
-
-" use dracula theme as the color theme
-colorscheme dracula
-" set background=dark
-
-" control whether highlight current line
-:hi CursorLine   cterm=NONE ctermbg=240 ctermfg=white guibg=188 guifg=white
-" use <Leader>+cur to toggle highlight current line
-:nnoremap <Leader>cur :set cursorline! cursorcolumn!<CR>
+" abosolute line number in normal mode
+" relative line number in insert mode
+autocmd InsertLeave * :set norelativenumber number
+autocmd InsertEnter * :set relativenumber
 
 " find as typing
 set incsearch
@@ -142,26 +121,38 @@ set hlsearch
 set ignorecase
 " if search input contains upper case, do not ignore
 set smartcase
-
+" toggle file type on
 filetype on
+" toggle plugin on
 filetype plugin on
+" toggle plugin indent on
 filetype plugin indent on
+" enable syntax
 syntax enable
+" allow to use mouse
 set mouse=a
 set mousehide
-
 " turn on spell check
 set nospell
-
 " smart indentation
 set smartindent
-
 " show matched brackets and so on
 set showmatch
 
-" Highlight problematic whitespace
-"set list
-"set listchars=tab:>>,eol:¬,trail:•,extends:#,nbsp:.
+
+" basic key mappings and shortcuts
+" map leader to <Space>
+let mapleader="\<SPACE>"
+" change <ESC> to jj
+imap jj <ESC>
+" use <Leader>+cur to toggle highlight current line
+:nnoremap <Leader>cur :set cursorline! cursorcolumn!<CR>
+" visual shifting
+vnoremap < <gv
+vnoremap > >gv
+" tab move
+noremap <C-L> <Esc>:tabnext<CR>
+noremap <C-H> <Esc>:tabprevious<CR>
 
 " clipboard setting
 "See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
@@ -173,16 +164,27 @@ if has('clipboard')
   endif
 endif
 
+
+" plugin settings 
+" vim-plug
+" install plugin using vim-plug
+map <leader>pi :PlugInstall<CR>
+
+" tagbar 
+nmap <leader>tag :TagbarToggle<CR>
+
+" nerdcomment
+nnoremap gcc :call NERDComment(0,"toggle")<CR>
+vnoremap gcc :call NERDComment(0,"toggle")<CR>
+
+" Nerdtree
 " open nerdtree automatically when nvim open
 autocmd vimenter * NERDTree
 " close vim if the only window left is open is nerd tree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" make it default to open a tab using nerdtree
-" let NERDTreeMapOpenInTab='<ENTER>'
+" nerdtree key shortcuts
+map <leader>dir :NERDTreeToggle<CR>
 
-" map gcc to comments toggle
-nnoremap gcc :call NERDComment(0,"toggle")<CR>
-vnoremap gcc :call NERDComment(0,"toggle")<CR>
 
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
@@ -214,13 +216,10 @@ let g:neoformat_enabled_javascript = ['prettier']
 " TODO: Python Configuration
 let g:neoformat_enabled_python = ['autopep8', 'isort']
 
-" Ale is to lint code
+" Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 1
-" tab move
-noremap <C-L> <Esc>:tabnext<CR>
-noremap <C-H> <Esc>:tabprevious<CR>

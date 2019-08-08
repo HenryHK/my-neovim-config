@@ -14,9 +14,11 @@ Plug 'git://github.com/tpope/vim-surround.git'
 " for repeat -> enhance surround.vim, . to repeat command
 Plug 'tpope/vim-repeat'
 
-" fuzzy search
-Plug 'ctrlpvim/ctrlp.vim'
+" fuzzy search everything utilizing fzf
+" if fzf is installed via homebrew
 Plug '/usr/local/opt/fzf'
+" install fzf wrapper plugin of vim
+Plug 'junegunn/fzf.vim'
 
 " file tree in current directory
 " <leader>dir to toggle
@@ -31,10 +33,6 @@ Plug 'tpope/vim-fugitive'
 
 "see https://github.com/airblade/vim-gitgutter
 Plug 'airblade/vim-gitgutter'
-nmap ]] <Plug>GitGutterNextHunk
-nmap [[ <Plug>GitGutterPrevHunk
-nmap gua <Plug>GitGutterUndoHunk
-nmap gpr <Plug>GitGutterPreviewHunk
 
 " fast buffer switch: <leader>bt to open
 Plug 'jlanzarotta/bufexplorer'
@@ -51,7 +49,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " TSServer which I reckon is better
 Plug 'Valloric/YouCompleteMe',{'frozen':'true'}
 
-" TODO list
+" List TODOs 
 Plug 'vim-scripts/TaskList.vim'
 
 " rainbow parentheses improved
@@ -143,6 +141,8 @@ set showmatch
 " basic key mappings and shortcuts
 " map leader to <Space>
 let mapleader="\<SPACE>"
+" doubel press esc to disable highlight in current document
+map <esc><esc> :noh<return> 
 " change <ESC> to jj
 imap jj <ESC>
 " use <Leader>+cur to toggle highlight current line
@@ -170,12 +170,19 @@ endif
 " install plugin using vim-plug
 map <leader>pi :PlugInstall<CR>
 
-" tagbar 
-nmap <leader>tag :TagbarToggle<CR>
+" tagbar toggle mapping
+nmap <F8> :TagbarToggle<CR>
 
 " nerdcomment
+" use gcc to quickly toggle comments in normal and visual mode
 nnoremap gcc :call NERDComment(0,"toggle")<CR>
 vnoremap gcc :call NERDComment(0,"toggle")<CR>
+
+" GitGutter
+nmap ]] <Plug>GitGutterNextHunk
+nmap [[ <Plug>GitGutterPrevHunk
+nmap gua <Plug>GitGutterUndoHunk
+nmap gpr <Plug>GitGutterPreviewHunk
 
 " Nerdtree
 " open nerdtree automatically when nvim open
@@ -183,8 +190,11 @@ autocmd vimenter * NERDTree
 " close vim if the only window left is open is nerd tree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " nerdtree key shortcuts
-map <leader>dir :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 
+" YouCompleteMe
+" YouCompleteMe GoToDefinition
+nnoremap <F12> :YcmCompleter GoToDefinition<cr>
 
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
@@ -206,8 +216,8 @@ let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 " F9 for coverage report
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
-" F12 for go to definition
-au FileType go nmap <F12> <Plug>(go-def)
+" F12 for go to definition - using ycm completer now
+" au FileType go nmap <F12> <Plug>(go-def)
 
 " TODO: JavaScript Configuration
 let g:javascript_plugin_jsdoc = 1
@@ -223,3 +233,21 @@ let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 1
+
+" fzf configuration
+" ctrlp files fuzzy search using fzf
+nmap <C-p> :Files<CR>
+" buffer fuzzy search 
+nmap <C-e> :Buffers<CR>
+" quickly switch to last open buffer
+let g:fzf_action = { 'ctrl-e': 'edit' }
+" autocomplete for :Git checkout <branch>
+function! s:gitCheckoutRef(ref) 
+    execute('Git checkout ' . a:ref)
+    " call feedkeys("i")
+endfunction
+function! s:gitListRefs()
+   let l:refs = execute("Git for-each-ref --format='\\%(refname:short)'")
+   return split(l:refs,'\r\n*')[1:] "jump past the first line which is the git command
+endfunction
+command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })

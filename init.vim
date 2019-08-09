@@ -103,6 +103,7 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 " set tab size and indentation to 4
 set tabstop=4
 set shiftwidth=4
+set expandtab
 
 " turn on line number
 set number
@@ -134,8 +135,11 @@ set mousehide
 set nospell
 " smart indentation
 set smartindent
+" set autoindent
 " show matched brackets and so on
 set showmatch
+autocmd FileType javascript.jsx setlocal tabstop=2
+autocmd FileType javascript.jsx setlocal shiftwidth=2
 
 
 " basic key mappings and shortcuts
@@ -163,7 +167,6 @@ if has('clipboard')
     set clipboard=unnamed
   endif
 endif
-
 
 " plugin settings 
 " vim-plug
@@ -217,7 +220,7 @@ let g:go_addtags_transform = "snakecase"
 " F9 for coverage report
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 " F12 for go to definition - using ycm completer now
-" au FileType go nmap <F12> <Plug>(go-def)
+au FileType go nmap <F12> <Plug>(go-def)
 
 " TODO: JavaScript Configuration
 let g:javascript_plugin_jsdoc = 1

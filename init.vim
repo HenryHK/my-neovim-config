@@ -65,7 +65,7 @@ Plug 'Chiel92/vim-autoformat'
 " dracula
 Plug 'dracula/vim'
 
-" Vim JavaScript
+" Vim JavaScip
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
@@ -77,6 +77,9 @@ Plug 'elzr/vim-json'
 " Vim Python
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'sbdchd/neoformat'
+
+" Vim Coffeescript
+Plug 'kchmck/vim-coffee-script'
 
 " end of plugins settings
 call plug#end()
@@ -140,6 +143,8 @@ set smartindent
 set showmatch
 autocmd FileType javascript.jsx setlocal tabstop=2
 autocmd FileType javascript.jsx setlocal shiftwidth=2
+set foldmethod=syntax
+set foldlevelstart=99
 
 
 " basic key mappings and shortcuts
@@ -155,8 +160,13 @@ imap jj <ESC>
 vnoremap < <gv
 vnoremap > >gv
 " tab move
-noremap <C-L> <Esc>:tabnext<CR>
-noremap <C-H> <Esc>:tabprevious<CR>
+nnoremap H gT
+nnoremap L gt
+" easier split navigation
+nnoremap <C-> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " clipboard setting
 "See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
@@ -189,7 +199,7 @@ nmap gpr <Plug>GitGutterPreviewHunk
 
 " Nerdtree
 " open nerdtree automatically when nvim open
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 " close vim if the only window left is open is nerd tree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " nerdtree key shortcuts
@@ -217,6 +227,8 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 " add json tags automatically
 let g:go_addtags_transform = "snakecase"
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 " F9 for coverage report
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 " F12 for go to definition - using ycm completer now
@@ -244,6 +256,7 @@ nmap <C-p> :Files<CR>
 nmap <C-e> :Buffers<CR>
 " quickly switch to last open buffer
 let g:fzf_action = { 'ctrl-e': 'edit' }
+
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
     execute('Git checkout ' . a:ref)
@@ -254,3 +267,16 @@ function! s:gitListRefs()
    return split(l:refs,'\r\n*')[1:] "jump past the first line which is the git command
 endfunction
 command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+nnoremap <silent> <Leader>f :Ag<CR>
+
+" fzf open action
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }

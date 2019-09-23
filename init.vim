@@ -69,7 +69,7 @@ Plug 'dracula/vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-Plug 'isRuslan/vim-es6'
+" Plug 'isRuslan/vim-es6'
 
 " Vim JSON
 Plug 'elzr/vim-json'
@@ -83,6 +83,9 @@ Plug 'kchmck/vim-coffee-script'
 
 " end of plugins settings
 call plug#end()
+
+" magic of using vim
+set nocompatible
 
 " fundamental settings
 " use dracula theme as the color theme
@@ -141,11 +144,13 @@ set smartindent
 " set autoindent
 " show matched brackets and so on
 set showmatch
+" sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2
 autocmd FileType javascript.jsx setlocal shiftwidth=2
+autocmd FileType coffeescript setlocal tabstop=2
+autocmd FileType coffeescript setlocal shiftwidth=2
 set foldmethod=syntax
 set foldlevelstart=99
-
 
 " basic key mappings and shortcuts
 " map leader to <Space>
@@ -163,7 +168,7 @@ vnoremap > >gv
 nnoremap H gT
 nnoremap L gt
 " easier split navigation
-nnoremap <C-> <C-W><C-J>
+nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
@@ -235,6 +240,7 @@ au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 au FileType go nmap <F12> <Plug>(go-def)
 
 " TODO: JavaScript Configuration
+let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
 let g:neoformat_enabled_javascript = ['prettier']
 

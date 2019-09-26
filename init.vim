@@ -44,10 +44,13 @@ Plug 'majutsushi/tagbar'
 " vim go plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Code complete engine
-" For javascript developers: tern is not maintained and YCM switched to
-" TSServer which I reckon is better
-Plug 'Valloric/YouCompleteMe',{'frozen':'true'}
+" Use coc instead of old ycm
+" Use release branch
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Or latest tag
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+" Or build from source code by use yarn: https://yarnpkg.com
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " List TODOs 
 Plug 'vim-scripts/TaskList.vim'
@@ -147,8 +150,10 @@ set showmatch
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2
 autocmd FileType javascript.jsx setlocal shiftwidth=2
-autocmd FileType coffeescript setlocal tabstop=2
-autocmd FileType coffeescript setlocal shiftwidth=2
+autocmd FileType coffee setlocal tabstop=2
+autocmd FileType coffee setlocal shiftwidth=2
+" support jsonc comment
+autocmd FileType json syntax match Comment +\/\/.\+$+
 set foldmethod=syntax
 set foldlevelstart=99
 
@@ -210,10 +215,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " nerdtree key shortcuts
 map <C-n> :NERDTreeToggle<CR>
 
-" YouCompleteMe
-" YouCompleteMe GoToDefinition
-nnoremap <F12> :YcmCompleter GoToDefinition<cr>
-
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
 " Go highlight
@@ -236,8 +237,6 @@ let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 " F9 for coverage report
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
-" F12 for go to definition - using ycm completer now
-au FileType go nmap <F12> <Plug>(go-def)
 
 " TODO: JavaScript Configuration
 let g:jsx_ext_required = 0
@@ -274,15 +273,28 @@ function! s:gitListRefs()
 endfunction
 command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
 
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-nnoremap <silent> <Leader>f :Ag<CR>
+" fzf now has Rg command built in
+nnoremap <silent> <Leader>f :Rg<CR>
 
 " fzf open action
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+" coc configuration
+function! SetupCommandAbbrs(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
+" Use C to open coc config
+call SetupCommandAbbrs('C', 'CocConfig')
+
+" GOTO of coc
+nmap <silent> <F12> <Plug>(coc-definition)
+
+" using tab to cycle through suggestion list
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"

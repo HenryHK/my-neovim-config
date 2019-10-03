@@ -1,4 +1,4 @@
-# My Vim/NeoVim Config (WIP, only Golang now)
+# My Vim/NeoVim Config (WIP, only Golang/JavaScript(JSX) now)
 
 ## Usage
 
@@ -24,9 +24,13 @@ TODO
 
 TODO
 
-### YouCompleteMe
+~### YouCompleteMe~
 
-YouCompleteMe requires additional installation and compile to enable its funtions. See the [YouCompleteMe Github repo](https://github.com/Valloric/YouCompleteMe)
+~YouCompleteMe requires additional installation and compile to enable its funtions. See the [YouCompleteMe Github repo](https://github.com/Valloric/YouCompleteMe)~
+
+### coc.nvim
+
+As a heavy vscode user, I do love the `lsp` developed by Microsoft. [coc.nvim](https://github.com/neoclide/coc.nvim) is the most popular (I guess?) lsp client in vim/nvim. They also have very friendly docs and even Chinese docs! Ycm is good but seems a bit out of date
 
 ## License
 

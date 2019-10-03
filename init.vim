@@ -29,7 +29,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " see git branch in airline
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
+" Easy git
+Plug 'neoclide/vim-easygit'
 
 "see https://github.com/airblade/vim-gitgutter
 Plug 'airblade/vim-gitgutter'
@@ -84,8 +86,15 @@ Plug 'sbdchd/neoformat'
 " Vim Coffeescript
 Plug 'kchmck/vim-coffee-script'
 
+" devicons
+Plug 'ryanoasis/vim-devicons'
+
+" Auto pairs
+Plug 'jiangmiao/auto-pairs'
 " end of plugins settings
 call plug#end()
+
+" Beiginning of general configuration
 
 " magic of using vim
 set nocompatible
@@ -187,6 +196,19 @@ if has('clipboard')
     set clipboard=unnamed
   endif
 endif
+
+" Vim general settings for coc
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 " plugin settings 
 " vim-plug
@@ -298,3 +320,10 @@ nmap <silent> <F12> <Plug>(coc-definition)
 " using tab to cycle through suggestion list
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" enable easygit
+let g:easygit_enable_command = 1

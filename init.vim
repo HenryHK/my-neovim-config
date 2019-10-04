@@ -29,9 +29,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " see git branch in airline
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " Easy git
-Plug 'neoclide/vim-easygit'
+" Plug 'neoclide/vim-easygit'
 
 "see https://github.com/airblade/vim-gitgutter
 Plug 'airblade/vim-gitgutter'
@@ -326,4 +326,4 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " enable easygit
-let g:easygit_enable_command = 1
+" let g:easygit_enable_command = 1

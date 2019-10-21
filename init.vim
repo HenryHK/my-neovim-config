@@ -281,29 +281,37 @@ let g:ale_fix_on_save = 1
 nmap <C-p> :Files<CR>
 " buffer fuzzy search 
 nmap <C-e> :Buffers<CR>
-" quickly switch to last open buffer
-let g:fzf_action = { 'ctrl-e': 'edit' }
-
-" autocomplete for :Git checkout <branch>
-function! s:gitCheckoutRef(ref) 
-    execute('Git checkout ' . a:ref)
-    " call feedkeys("i")
-endfunction
-function! s:gitListRefs()
-   let l:refs = execute("Git for-each-ref --format='\\%(refname:short)'")
-   return split(l:refs,'\r\n*')[1:] "jump past the first line which is the git command
-endfunction
-command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
-
-" fzf now has Rg command built in
-nnoremap <silent> <Leader>f :Rg<CR>
-
 " fzf open action
 let g:fzf_action = {
+  \ 'ctrl-e': 'edit',
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" autocomplete for :Git checkout <branch>
+function! s:gitCheckoutRef(ref) 
+    execute('Git checkout ' . a:ref)
+endfunction
+
+function! s:gitListRefs()
+   let l:refs = execute("Git for-each-ref --format='\\%(refname:short)'")
+   return split(l:refs,'\r\n*')[1:] "jump past the first line which is the git command
+endfunction
+
+command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
+
+" customize Rg with preview
+let $BAT_THEME = 'TwoDark'
+let $FZF_PREVIEW_COMMAND = 'bat --color=always {} || cat {} || tree -C {}'
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview(),
+  \ <bang>0)
+" fzf now has Rg command built in
+nnoremap <silent> <Leader>f :Rg<CR>
+
+" COC.nvim
 " coc configuration
 function! SetupCommandAbbrs(from, to)
   exec 'cnoreabbrev <expr> '.a:from
@@ -324,6 +332,3 @@ inoremap <silent><expr> <Tab>
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" enable easygit
-" let g:easygit_enable_command = 1

@@ -16,7 +16,7 @@ Plug 'tpope/vim-repeat'
 
 " fuzzy search everything utilizing fzf
 " if fzf is installed via homebrew
-Plug '/usr/local/opt/fzf'
+Plug '/usr/bin/fzf'
 " install fzf wrapper plugin of vim
 Plug 'junegunn/fzf.vim'
 

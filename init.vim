@@ -118,7 +118,7 @@ set scrolljump=5
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
-" set tab size and indentation to 4
+" use space to all tab, set indentation to 4
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -165,7 +165,7 @@ autocmd FileType javascript.jsx setlocal noexpandtab
 autocmd FileType coffee setlocal tabstop=2
 autocmd FileType coffee setlocal noexpandtab
 " use indentation to fold for coffeescript
-autocmd FileType coffee setlocal foldmethod=indentation
+autocmd FileType coffee setlocal foldmethod=indent
 " support jsonc comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 

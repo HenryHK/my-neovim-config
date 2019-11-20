@@ -156,15 +156,18 @@ set smartindent
 " set autoindent
 " show matched brackets and so on
 set showmatch
-" sepcial indentation for jsx and coffeescript
-autocmd FileType javascript.jsx setlocal tabstop=2
-autocmd FileType javascript.jsx setlocal shiftwidth=2
-autocmd FileType coffee setlocal tabstop=2
-autocmd FileType coffee setlocal shiftwidth=2
-" support jsonc comment
-autocmd FileType json syntax match Comment +\/\/.\+$+
+" fold method
 set foldmethod=syntax
 set foldlevelstart=99
+" sepcial indentation for jsx and coffeescript
+autocmd FileType javascript.jsx setlocal tabstop=2
+autocmd FileType javascript.jsx setlocal noexpandtab
+autocmd FileType coffee setlocal tabstop=2
+autocmd FileType coffee setlocal noexpandtab
+" use indentation to fold for coffeescript
+autocmd FileType coffee setlocal foldmethod=indentation
+" support jsonc comment
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " basic key mappings and shortcuts
 " map leader to <Space>

@@ -61,10 +61,14 @@ Plug 'vim-scripts/TaskList.vim'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
+" EasyFold only for Python
+Plug 'tmhedberg/SimpylFold'
+let g:SimpylFold_docstring_preview = 1
+
 " indentation indication
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
-" vim autoformay :Autoformat to call
+" vim autoformat :Autoformat to call
 Plug 'Chiel92/vim-autoformat'
 
 " dracula
@@ -166,7 +170,6 @@ set showmatch
 " fold method
 set foldmethod=syntax
 set foldlevelstart=99
-autocmd FileType python setlocal foldmethod=manual
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab

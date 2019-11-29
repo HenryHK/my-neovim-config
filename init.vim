@@ -134,38 +134,43 @@ autocmd InsertEnter * :set relativenumber
 set incsearch
 " highlight search terms
 set hlsearch
+
 " ignore case when searching
 set ignorecase
 " if search input contains upper case, do not ignore
 set smartcase
+
 " toggle file type on
 filetype on
 " toggle plugin on
 filetype plugin on
 " toggle plugin indent on
 filetype plugin indent on
+
 " enable syntax
 syntax enable
+
 " allow to use mouse
 set mouse=a
 set mousehide
+
 " turn on spell check
 set nospell
+
 " smart indentation
 set smartindent
-" set autoindent
+
 " show matched brackets and so on
 set showmatch
+
 " fold method
 set foldmethod=syntax
 set foldlevelstart=99
+autocmd FileType python setlocal foldmethod=manual
+
 " sepcial indentation for jsx and coffeescript
-autocmd FileType javascript.jsx setlocal tabstop=2
-autocmd FileType javascript.jsx setlocal noexpandtab
-autocmd FileType coffee setlocal tabstop=2
-autocmd FileType coffee setlocal noexpandtab
-" use indentation to fold for coffeescript
-autocmd FileType coffee setlocal foldmethod=indent
+autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
+autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab
 " support jsonc comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 

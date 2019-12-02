@@ -198,6 +198,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" easier split vertical resize
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Right> <C-w>>
+nnoremap <S-Left> <C-w><
+
 " neovim terminal Esc key mapping
 nnoremap <Leader>sh :belowright split term://zsh<CR>
 if has('nvim')

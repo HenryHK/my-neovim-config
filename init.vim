@@ -61,10 +61,14 @@ Plug 'vim-scripts/TaskList.vim'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
+" EasyFold only for Python
+Plug 'tmhedberg/SimpylFold'
+let g:SimpylFold_docstring_preview = 1
+
 " indentation indication
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
-" vim autoformay :Autoformat to call
+" vim autoformat :Autoformat to call
 Plug 'Chiel92/vim-autoformat'
 
 " dracula
@@ -118,7 +122,7 @@ set scrolljump=5
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
-" set tab size and indentation to 4
+" use space to all tab, set indentation to 4
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -134,37 +138,44 @@ autocmd InsertEnter * :set relativenumber
 set incsearch
 " highlight search terms
 set hlsearch
+
 " ignore case when searching
 set ignorecase
 " if search input contains upper case, do not ignore
 set smartcase
+
 " toggle file type on
 filetype on
 " toggle plugin on
 filetype plugin on
 " toggle plugin indent on
 filetype plugin indent on
+
 " enable syntax
 syntax enable
+
 " allow to use mouse
 set mouse=a
 set mousehide
+
 " turn on spell check
 set nospell
+
 " smart indentation
 set smartindent
-" set autoindent
+
 " show matched brackets and so on
 set showmatch
-" sepcial indentation for jsx and coffeescript
-autocmd FileType javascript.jsx setlocal tabstop=2
-autocmd FileType javascript.jsx setlocal shiftwidth=2
-autocmd FileType coffee setlocal tabstop=2
-autocmd FileType coffee setlocal shiftwidth=2
-" support jsonc comment
-autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" fold method
 set foldmethod=syntax
 set foldlevelstart=99
+
+" sepcial indentation for jsx and coffeescript
+autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
+autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab
+" support jsonc comment
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " basic key mappings and shortcuts
 " map leader to <Space>
@@ -186,6 +197,12 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" easier split vertical resize
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Right> <C-w>>
+nnoremap <S-Left> <C-w><
 
 " neovim terminal Esc key mapping
 nnoremap <Leader>sh :belowright split term://zsh<CR>

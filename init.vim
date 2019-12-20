@@ -240,7 +240,7 @@ set signcolumn=yes
 map <leader>pi :PlugInstall<CR>
 
 " tagbar toggle mapping
-nmap <F8> :TagbarToggle<CR>
+nmap <F9> :TagbarToggle<CR>
 
 " nerdcomment
 " use gcc to quickly toggle comments in normal and visual mode
@@ -248,8 +248,8 @@ nnoremap gcc :call NERDComment(0,"toggle")<CR>
 vnoremap gcc :call NERDComment(0,"toggle")<CR>
 
 " GitGutter
-nmap ]] <Plug>GitGutterNextHunk
-nmap [[ <Plug>GitGutterPrevHunk
+nmap <right><right> <Plug>GitGutterNextHunk
+nmap <left><left> <Plug>GitGutterPrevHunk
 nmap gua <Plug>GitGutterUndoHunk
 nmap gpr <Plug>GitGutterPreviewHunk
 

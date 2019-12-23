@@ -21,7 +21,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " file tree in current directory
-" <leader>dir to toggle
+" <ctrl>-n to toggle
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -32,18 +32,10 @@ Plug 'vim-airline/vim-airline-themes'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/git-messenger.vim'
-
-" Easy git
-" Plug 'neoclide/vim-easygit'
-
-"see https://github.com/airblade/vim-gitgutter
 Plug 'airblade/vim-gitgutter'
 
-" fast buffer switch: <leader>bt to open
-Plug 'jlanzarotta/bufexplorer'
-
 " Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
-" <leader>tag
+" <F9> to toggle
 Plug 'majutsushi/tagbar'
 
 " vim go plugin
@@ -71,11 +63,10 @@ let g:SimpylFold_docstring_preview = 1
 " indentation indication
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
+
 " vim autoformat :Autoformat to call
 Plug 'Chiel92/vim-autoformat'
 
-" dracula
-Plug 'dracula/vim'
 
 " Vim JavaScip
 Plug 'pangloss/vim-javascript'
@@ -95,6 +86,8 @@ Plug 'kchmck/vim-coffee-script'
 
 " devicons
 Plug 'ryanoasis/vim-devicons'
+" dracula
+Plug 'dracula/vim'
 
 " Auto pairs
 Plug 'jiangmiao/auto-pairs'
@@ -241,6 +234,7 @@ set signcolumn=yes
 " vim-plug
 " install plugin using vim-plug
 map <leader>pi :PlugInstall<CR>
+map <leader>cl :PlugClean<CR>
 
 " tagbar toggle mapping
 nmap <F9> :TagbarToggle<CR>
@@ -284,8 +278,8 @@ let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
-" F9 for coverage report
-au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+" F10 for coverage report
+au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 
 " TODO: JavaScript Configuration
 let g:jsx_ext_required = 0

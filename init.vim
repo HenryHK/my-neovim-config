@@ -28,8 +28,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Airline enhancing bottom line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" see git branch in airline
+
+" Git
 Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
+
 " Easy git
 " Plug 'neoclide/vim-easygit'
 

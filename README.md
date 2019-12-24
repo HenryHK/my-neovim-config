@@ -63,7 +63,7 @@ Syntax highlighting and simple lint works.
 
 I use `<space>` as leader key. The easy position makes it easy and encourages me to use it more.
 
-### <Esc>
+### Esc
 
 I map `jj` as `<esc>`. Not only because of the stupid touchbar (Apple gave it back now), but make normal mode more accessible for me, which I think is a good practice for every vimmer.
 

@@ -69,7 +69,9 @@ I map `jj` as `<esc>`. Not only because of the stupid touchbar (Apple gave it ba
 
 ### Fuzzy search
 
-I use `fzf` as native app and install the `fzf-vim` plugin wrapping it by vim. Also I installed `bat` to provide file preview with syntax highlighting.
+I use `fzf` as native app and install the `fzf-vim` plugin wrapping it by vim. Also I installed [bat](https://github.com/sharkdp/bat) to provide file preview with syntax highlighting.
+
+Text fuzzy search requires [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 Functions:
 
@@ -78,8 +80,7 @@ Functions:
 
 2. <ctrl>-e: buffer file fuzzy search
 
-3. <leader>f: text fuzzy search (worked with [ripgrep](https://github.com/BurntSushi/ripgrep))
-
+3. <leader>f: text fuzzy search 
 ```
 
 ### Git

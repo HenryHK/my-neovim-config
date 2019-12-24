@@ -99,7 +99,7 @@ I'm used to work with git in commandline. But I found it handy to access some gi
 
 the status in gutter is provided by `vim-gitgutter`.
 
-### Buffer, Pane, Tab, ect.
+### Buffer, Pane, Tab, etc.
 
 Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.
 

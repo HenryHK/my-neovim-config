@@ -88,7 +88,7 @@ I'm used to work with git in commandline. But I found it handy to access some gi
 
 3. <leader>gm - show git message of the current line (git-messenger)
 
-4. >>/<< - next/previous git hunk (fugitive)
+4. <right><right>/<left><left> - next/previous git hunk (fugitive)
 ```
 
 the status in gutter is provided by `vim-gitgutter`.

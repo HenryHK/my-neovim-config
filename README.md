@@ -44,6 +44,11 @@ Not all plugins I installed are required for JS development but I found it works
 
 Sometimes syntax highlighting has issues with complicated string templates.
 
+The TS/JS LSP works like a charm, the only shortcuts I use in my daily development is
+```
+* <F12>: Go to definition
+```
+
 #### Python
 
 Still work in progress but it feels ok.

@@ -1,4 +1,4 @@
-# My Vim/NeoVim Config (WIP, only Golang/Javascript(JSX) now)
+# My Neovim Configuration (prob. Vim as well)
 
 ## Plugin Management
 

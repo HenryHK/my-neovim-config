@@ -93,5 +93,41 @@ I'm used to work with git in commandline. But I found it handy to access some gi
 
 the status in gutter is provided by `vim-gitgutter`.
 
+### Buffer, Pane, Tab, ect.
+
+Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.
+
+```
+1. <ctrl>-v: vertical split open from fzf window
+
+2. <ctrl>-x: horizontal split open from fzf window
+
+3. <ctrl>-t: open from fzf window in another tab
+```
+
+Also I use `NerdTree` as file explorer, I use `<ctrl>-n` to toggle it and keep default key bindings.
+
+For navigation:
+
+```
+" tab move
+nnoremap H gT
+nnoremap L gt
+" easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+```
+
+And pane resize:
+```
+" easier split vertical resize
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Right> <C-w>>
+nnoremap <S-Left> <C-w><
+```
+
 ## License
 MIT

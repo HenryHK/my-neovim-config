@@ -129,5 +129,9 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Left> <C-w><
 ```
 
+### Terminal
+
+Sometimes, just sometimes, I use terminal in neovim. `<leader>sh` to open it.
+
 ## License
 MIT

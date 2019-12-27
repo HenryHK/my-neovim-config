@@ -309,6 +309,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
     execute('Git checkout ' . a:ref)
@@ -353,3 +354,30 @@ inoremap <silent><expr> <Tab>
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" terminal
+"
+tnoremap <silent> <C-t> <C-\><C-n>:call ToggleTerminal(12)<Enter>
+nnoremap <silent> <C-t> :call ToggleTerminal(12)<Enter>
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! ToggleTerminal(height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen($SHELL, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction

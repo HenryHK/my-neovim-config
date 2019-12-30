@@ -201,7 +201,7 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Left> <C-w><
 
 " neovim terminal Esc key mapping
-nnoremap <Leader>sh :belowright split term://zsh<CR>
+" nnoremap <Leader>sh :belowright split term://zsh<CR>
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <M-[> <Esc>

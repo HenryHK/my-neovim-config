@@ -137,7 +137,7 @@ nnoremap <S-Left> <C-w><
 
 ### Terminal
 
-Sometimes, just sometimes, I use terminal in neovim. `<leader>sh` to open it.
+Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)
 
 ## License
 MIT

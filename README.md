@@ -1,5 +1,9 @@
 # My Neovim Configuration (prob. Vim as well)
 
+## Neovim Configuration Location on Mac
+
+`~/.config/nvim`
+
 ## Plugin Management
 
 ### NeoVim Plugin Location on Mac
@@ -12,13 +16,13 @@ Use [Vim-Plug](https://github.com/junegunn/vim-plug) as plugin manager. Install 
 
 Copy the config into your `.vimrc` or `init.vim` (I didn't test this with Vim but most of the settings should be the same). Save it and reopen a vim instance (or :so %) to run `:PlugInstall` or `<leader>pi` to install all plugins.
 
-To remove useless plugins, run `:PlugClean` pr `<leader>pi`.
+To remove useless plugins, run `:PlugClean`.
 
 ## Autocomplete
 
 ### Plugin
 
-After a long time usage of [YouCompleteMe](https://github.com/Valloric/YouCompleteMe), I switched to [coc.nvim](https://github.com/neoclide/coc.nvim). With the great async feature of neovim, it works like charm especially when most mainstream languages have great [language server protocol](https://microsoft.github.io/language-server-protocol/) supports(__Thank you Microsoft, sincerely__).
+After a long time usage of [YouCompleteMe](https://github.com/Valloric/YouCompleteMe), I switched to [coc.nvim](https://github.com/neoclide/coc.nvim). With the great async feature of neovim, it works like a charm especially when most mainstream languages have great [language server protocol](https://microsoft.github.io/language-server-protocol/) supports(__Thank you Microsoft, sincerely__).
 
 ### Language support 
 
@@ -51,11 +55,15 @@ The TS/JS LSP works like a charm, the only shortcuts I use in my daily developme
 
 #### Python
 
-Still work in progress but it feels ok.
+Still WIP but it feels ok. I use nvim now to develop our in-house ETL using Apache Airflow.
 
 #### CoffeeScript
 
-Syntax highlighting and simple lint works.
+Syntax highlighting and simple lint.
+
+#### Rust
+
+I just started learning Rust. Not sure about complicated projects, but `Hello-Rust` works.
 
 ## General Settings
 

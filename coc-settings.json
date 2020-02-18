@@ -6,5 +6,8 @@
           "filetypes": ["go"]
         }
     },
-    "tsserver.npm": "/usr/bin/npm"
+    "tsserver.npm": "/usr/bin/npm",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "dart"
+    ],
 }

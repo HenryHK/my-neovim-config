@@ -21,26 +21,21 @@ Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 
 " file tree in current directory
-" <leader>dir to toggle
+" <ctrl>-n to toggle
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Airline enhancing bottom line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" see git branch in airline
-Plug 'tpope/vim-fugitive'
-" Easy git
-" Plug 'neoclide/vim-easygit'
 
-"see https://github.com/airblade/vim-gitgutter
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
 Plug 'airblade/vim-gitgutter'
 
-" fast buffer switch: <leader>bt to open
-Plug 'jlanzarotta/bufexplorer'
-
 " Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
-" <leader>tag
+" <F9> to toggle
 Plug 'majutsushi/tagbar'
 
 " vim go plugin
@@ -68,11 +63,10 @@ let g:SimpylFold_docstring_preview = 1
 " indentation indication
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
+
 " vim autoformat :Autoformat to call
 Plug 'Chiel92/vim-autoformat'
 
-" dracula
-Plug 'dracula/vim'
 
 " Vim JavaScip
 Plug 'pangloss/vim-javascript'
@@ -92,9 +86,14 @@ Plug 'kchmck/vim-coffee-script'
 
 " devicons
 Plug 'ryanoasis/vim-devicons'
+" dracula
+Plug 'dracula/vim'
 
 " Auto pairs
 Plug 'jiangmiao/auto-pairs'
+
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
 " end of plugins settings
 call plug#end()
 
@@ -173,7 +172,7 @@ set foldlevelstart=99
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
-autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab foldmethod=manual
 " support jsonc comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -205,7 +204,7 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Left> <C-w><
 
 " neovim terminal Esc key mapping
-nnoremap <Leader>sh :belowright split term://zsh<CR>
+" nnoremap <Leader>sh :belowright split term://zsh<CR>
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <M-[> <Esc>
@@ -238,9 +237,10 @@ set signcolumn=yes
 " vim-plug
 " install plugin using vim-plug
 map <leader>pi :PlugInstall<CR>
+map <leader>cl :PlugClean<CR>
 
 " tagbar toggle mapping
-nmap <F8> :TagbarToggle<CR>
+nmap <F9> :TagbarToggle<CR>
 
 " nerdcomment
 " use gcc to quickly toggle comments in normal and visual mode
@@ -248,10 +248,10 @@ nnoremap gcc :call NERDComment(0,"toggle")<CR>
 vnoremap gcc :call NERDComment(0,"toggle")<CR>
 
 " GitGutter
-nmap ]] <Plug>GitGutterNextHunk
-nmap [[ <Plug>GitGutterPrevHunk
-nmap gua <Plug>GitGutterUndoHunk
-nmap gpr <Plug>GitGutterPreviewHunk
+nmap <right><right> <Plug>(GitGutterNextHunk)
+nmap <left><left> <Plug>(GitGutterPrevHunk)
+nmap gua <Plug>(GitGutterUndoHunk)
+nmap gpr <Plug>(GitGutterPreviewHunk)
 
 " Nerdtree
 " open nerdtree automatically when nvim open
@@ -281,8 +281,8 @@ let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
-" F9 for coverage report
-au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+" F10 for coverage report
+au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 
 " TODO: JavaScript Configuration
 let g:jsx_ext_required = 0
@@ -292,6 +292,9 @@ let g:neoformat_enabled_javascript = ['prettier']
 " TODO: Python Configuration
 let g:neoformat_enabled_python = ['autopep8', 'isort']
 
+" Flutter Configuration
+let g:dart_style_guide = 2
+let dart_html_in_string=v:true
 " Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
@@ -311,6 +314,7 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
 
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
@@ -337,6 +341,8 @@ nnoremap <silent> <Leader>f :Rg<CR>
 
 " COC.nvim
 " coc configuration
+let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
+
 function! SetupCommandAbbrs(from, to)
   exec 'cnoreabbrev <expr> '.a:from
         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
@@ -356,3 +362,30 @@ inoremap <silent><expr> <Tab>
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" terminal
+"
+tnoremap <silent> <C-t> <C-\><C-n>:call ToggleTerminal(12)<Enter>
+nnoremap <silent> <C-t> :call ToggleTerminal(12)<Enter>
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! ToggleTerminal(height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen($SHELL, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction

@@ -91,6 +91,9 @@ Plug 'dracula/vim'
 
 " Auto pairs
 Plug 'jiangmiao/auto-pairs'
+
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
 " end of plugins settings
 call plug#end()
 
@@ -169,7 +172,7 @@ set foldlevelstart=99
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
-autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab foldmethod=manual
 " support jsonc comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -245,10 +248,10 @@ nnoremap gcc :call NERDComment(0,"toggle")<CR>
 vnoremap gcc :call NERDComment(0,"toggle")<CR>
 
 " GitGutter
-nmap <right><right> <Plug>GitGutterNextHunk
-nmap <left><left> <Plug>GitGutterPrevHunk
-nmap gua <Plug>GitGutterUndoHunk
-nmap gpr <Plug>GitGutterPreviewHunk
+nmap <right><right> <Plug>(GitGutterNextHunk)
+nmap <left><left> <Plug>(GitGutterPrevHunk)
+nmap gua <Plug>(GitGutterUndoHunk)
+nmap gpr <Plug>(GitGutterPreviewHunk)
 
 " Nerdtree
 " open nerdtree automatically when nvim open
@@ -289,6 +292,9 @@ let g:neoformat_enabled_javascript = ['prettier']
 " TODO: Python Configuration
 let g:neoformat_enabled_python = ['autopep8', 'isort']
 
+" Flutter Configuration
+let g:dart_style_guide = 2
+let dart_html_in_string=v:true
 " Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
@@ -335,6 +341,8 @@ nnoremap <silent> <Leader>f :Rg<CR>
 
 " COC.nvim
 " coc configuration
+let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
+
 function! SetupCommandAbbrs(from, to)
   exec 'cnoreabbrev <expr> '.a:from
         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'

@@ -94,6 +94,9 @@ Plug 'jiangmiao/auto-pairs'
 
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
+
+" language pack
+Plug 'sheerun/vim-polyglot'
 " end of plugins settings
 call plug#end()
 
@@ -295,13 +298,14 @@ let g:neoformat_enabled_python = ['autopep8', 'isort']
 " Flutter Configuration
 let g:dart_style_guide = 2
 let dart_html_in_string=v:true
+
 " Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fixers = {'javascript': ['eslint']}
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " fzf configuration
 " ctrlp files fuzzy search using fzf
@@ -363,10 +367,15 @@ inoremap <silent><expr> <Tab>
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" terminal
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap <leader>p  <Plug>(coc-format-selected)
+nmap <leader>p  <Plug>(coc-format-selected)
+
+"command! -nargs=0 Prettier :CocCommand prettier.formatFile terminal
 "
-tnoremap <silent> <C-t> <C-\><C-n>:call ToggleTerminal(12)<Enter>
-nnoremap <silent> <C-t> :call ToggleTerminal(12)<Enter>
+tnoremap <silent> <C-s> <C-\><C-n>:call ToggleTerminal(12)<Enter>
+nnoremap <silent> <C-s> :call ToggleTerminal(12)<Enter>
 " Terminal Function
 let g:term_buf = 0
 let g:term_win = 0

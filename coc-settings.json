@@ -9,4 +9,8 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "dart"
     ],
+    "coc.preferences.jumpCommand": "tab drop",
+    "python.jediEnabled": false,
+    "eslint.autoFixOnSave": true,
+    "coc.preferences.formatOnSaveFiletypes": ["javascript", "markdown", "javascriptreact"]
 }

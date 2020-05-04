@@ -49,7 +49,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 " Or build from source code by use yarn: https://yarnpkg.com
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-" List TODOs 
+" List TODOs
 Plug 'vim-scripts/TaskList.vim'
 
 " rainbow parentheses improved
@@ -306,6 +306,7 @@ let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 0
+let g:ale_open_list = 1
 
 " fzf configuration
 " ctrlp files fuzzy search using fzf

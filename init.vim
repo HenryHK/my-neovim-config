@@ -97,6 +97,8 @@ Plug 'dart-lang/dart-vim-plugin'
 
 " language pack
 Plug 'sheerun/vim-polyglot'
+
+Plug 'tpope/vim-obsession'
 " end of plugins settings
 call plug#end()
 
@@ -303,10 +305,10 @@ let dart_html_in_string=v:true
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 0
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 0
-let g:ale_open_list = 1
+let g:ale_open_list = 0
 
 " fzf configuration
 " ctrlp files fuzzy search using fzf

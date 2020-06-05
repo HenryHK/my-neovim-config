@@ -166,7 +166,7 @@ set mousehide
 set nospell
 
 " smart indentation
-set smartindent
+set autoindent
 
 " show matched brackets and so on
 set showmatch
@@ -286,6 +286,8 @@ let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
+" golangci-lint with custom config file
+let g:go_metalinter_command='golangci-lint run --print-issued-lines=false --build-tags --exclude-use-default=use'
 " F10 for coverage report
 au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 

@@ -33,7 +33,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'rhysd/git-messenger.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
@@ -50,9 +49,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 " Or build from source code by use yarn: https://yarnpkg.com
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
-" List TODOs
-Plug 'vim-scripts/TaskList.vim'
 
 " rainbow parentheses improved
 Plug 'luochen1990/rainbow'
@@ -81,12 +77,6 @@ Plug 'sbdchd/neoformat'
 " Vim Coffeescript
 Plug 'kchmck/vim-coffee-script'
 
-" dracula
-Plug 'dracula/vim'
-
-" Auto pairs
-Plug 'jiangmiao/auto-pairs'
-
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
 
@@ -96,7 +86,7 @@ Plug 'sheerun/vim-polyglot'
 " session management
 Plug 'tpope/vim-obsession'
 
-" color schema
+" gruv color schema
 Plug 'morhetz/gruvbox'
 " end of plugins settings
 call plug#end()
@@ -217,6 +207,7 @@ if has('nvim')
   tnoremap <M-[> <Esc>
   tnoremap <C-v><Esc> <Esc>
 endif
+
 " clipboard setting
 "See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
 if has('clipboard')
@@ -267,6 +258,13 @@ nmap gpr <Plug>(GitGutterPreviewHunk)
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " nerdtree key shortcuts
 map <C-n> :NERDTreeToggle<CR>
+" NERDTree configurations, this doesn't fully work, additional square brackets
+" are added somehow to folders
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
@@ -297,14 +295,6 @@ au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
 let g:neoformat_enabled_javascript = ['prettier']
-
-" TODO: Python Configuration
-let g:neoformat_enabled_python = ['autopep8', 'isort']
-
-" Flutter Configuration
-let g:dart_style_guide = 2
-let dart_html_in_string=v:true
-
 " Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
@@ -314,6 +304,12 @@ let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 0
 let g:ale_open_list = 0
 
+" TODO: Python Configuration
+let g:neoformat_enabled_python = ['autopep8', 'isort']
+
+" Flutter Configuration
+let g:dart_style_guide = 2
+let dart_html_in_string=v:true
 
 " fzf configuration
 " ctrlp files fuzzy search using fzf
@@ -326,7 +322,6 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
 
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
@@ -351,16 +346,14 @@ command! -bang -nargs=* Rg
 " fzf now has Rg command built in
 nnoremap <silent> <Leader>f :Rg<CR>
 
-" COC.nvim
+" coc.nvim
 " coc configuration
 let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
-
 function! SetupCommandAbbrs(from, to)
   exec 'cnoreabbrev <expr> '.a:from
         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
-
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
 
@@ -381,9 +374,9 @@ vmap <leader>p  <Plug>(coc-format-selected)
 nmap <leader>p  <Plug>(coc-format-selected)
 
 "command! -nargs=0 Prettier :CocCommand prettier.formatFile terminal
-"
 tnoremap <silent> <C-s> <C-\><C-n>:call ToggleTerminal(12)<Enter>
 nnoremap <silent> <C-s> :call ToggleTerminal(12)<Enter>
+
 " Terminal Function
 let g:term_buf = 0
 let g:term_win = 0
@@ -406,9 +399,3 @@ function! ToggleTerminal(height)
         let g:term_win = win_getid()
     endif
 endfunction
-" NERDTree configurations
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif

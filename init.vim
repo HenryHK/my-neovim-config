@@ -24,6 +24,8 @@ Plug 'junegunn/fzf.vim'
 " <ctrl>-n to toggle
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+" devicons
+Plug 'ryanoasis/vim-devicons'
 
 " Airline enhancing bottom line
 Plug 'vim-airline/vim-airline'
@@ -64,15 +66,10 @@ let g:SimpylFold_docstring_preview = 1
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
 
-" vim autoformat :Autoformat to call
-Plug 'Chiel92/vim-autoformat'
-
-
-" Vim JavaScip
+" Vim JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-" Plug 'isRuslan/vim-es6'
 
 " Vim JSON
 Plug 'elzr/vim-json'
@@ -84,8 +81,6 @@ Plug 'sbdchd/neoformat'
 " Vim Coffeescript
 Plug 'kchmck/vim-coffee-script'
 
-" devicons
-Plug 'ryanoasis/vim-devicons'
 " dracula
 Plug 'dracula/vim'
 
@@ -98,7 +93,11 @@ Plug 'dart-lang/dart-vim-plugin'
 " language pack
 Plug 'sheerun/vim-polyglot'
 
+" session management
 Plug 'tpope/vim-obsession'
+
+" color schema
+Plug 'morhetz/gruvbox'
 " end of plugins settings
 call plug#end()
 
@@ -109,7 +108,7 @@ set nocompatible
 
 " fundamental settings
 " use dracula theme as the color theme
-colorscheme dracula
+autocmd vimenter * colorscheme gruvbox
 
 " improve neovim performance slightly
 set  nocursorcolumn
@@ -174,6 +173,9 @@ set showmatch
 " fold method
 set foldmethod=syntax
 set foldlevelstart=99
+
+" set true color, https://github.com/morhetz/gruvbox/wiki/Terminal-specific
+set termguicolors
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
@@ -312,6 +314,7 @@ let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 0
 let g:ale_open_list = 0
 
+
 " fzf configuration
 " ctrlp files fuzzy search using fzf
 nmap <C-p> :Files<CR>
@@ -403,3 +406,9 @@ function! ToggleTerminal(height)
         let g:term_win = win_getid()
     endif
 endfunction
+" NERDTree configurations
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif

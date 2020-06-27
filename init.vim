@@ -164,6 +164,10 @@ set showmatch
 set foldmethod=syntax
 set foldlevelstart=99
 
+" this is needed for correctly syntax highlight long lines
+" for me it's js string literals, found the answer here: https://www.reddit.com/r/vim/comments/7imly7/syntax_highlighting_breaks_on_really_long_lines/
+set synmaxcol=0
+
 " set true color, https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 set termguicolors
 

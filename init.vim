@@ -80,7 +80,8 @@ Plug 'kchmck/vim-coffee-script'
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
 
-" language pack
+" language pack: install this for better syntax highlight
+" but it turns out because of long string buffer limit
 Plug 'sheerun/vim-polyglot'
 
 " session management
@@ -166,6 +167,8 @@ set foldlevelstart=99
 
 " this is needed for correctly syntax highlight long lines
 " for me it's js string literals, found the answer here: https://www.reddit.com/r/vim/comments/7imly7/syntax_highlighting_breaks_on_really_long_lines/
+" this could dramatically slow performance, you may need to set this to a
+" certain number or just do :syntax off
 set synmaxcol=0
 
 " set true color, https://github.com/morhetz/gruvbox/wiki/Terminal-specific
@@ -273,16 +276,15 @@ endif
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
 " Go highlight
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-" highlight the same ids
-let g:go_auto_sameids = 1
+" let g:go_highlight_build_constraints = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_structs = 1
+" let g:go_highlight_types = 1
+" let g:go_auto_sameids = 1
 " import when format
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
@@ -377,7 +379,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>p  <Plug>(coc-format-selected)
 nmap <leader>p  <Plug>(coc-format-selected)
 
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile terminal
+" coc terminal
 tnoremap <silent> <C-s> <C-\><C-n>:call ToggleTerminal(12)<Enter>
 nnoremap <silent> <C-s> :call ToggleTerminal(12)<Enter>
 

@@ -89,6 +89,9 @@ Plug 'tpope/vim-obsession'
 
 " gruv color schema
 Plug 'morhetz/gruvbox'
+" wakatime
+Plug 'wakatime/vim-wakatime'
+
 " end of plugins settings
 call plug#end()
 

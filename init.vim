@@ -149,7 +149,11 @@ filetype plugin on
 filetype plugin indent on
 
 " enable syntax
-syntax enable
+" this is to help with devicons load problem
+" https://github.com/ryanoasis/vim-devicons/issues/215
+if !exists('g:syntax_on')
+	syntax enable
+endif
 
 " allow to use mouse
 set mouse=a

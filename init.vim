@@ -34,6 +34,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'APZelos/blamer.nvim'
 
 " Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
 " <F9> to toggle
@@ -351,11 +352,12 @@ command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': functio
 " customize Rg with preview
 let $BAT_THEME = 'TwoDark'
 let $FZF_PREVIEW_COMMAND = 'bat --color=always {} || cat {} || tree -C {}'
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
-  \ 1,
-  \ fzf#vim#with_preview(),
-  \ <bang>0)
+let g:fzf_layout = { 'down': '~50%' }
+" command! -bang -nargs=* Rg
+  " \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
+  " \ 1,
+  " \ fzf#vim#with_preview(),
+  " \ <bang>0)
 " fzf now has Rg command built in
 nnoremap <silent> <Leader>f :Rg<CR>
 

@@ -33,6 +33,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'APZelos/blamer.nvim'
 
@@ -414,3 +415,7 @@ function! ToggleTerminal(height)
         let g:term_win = win_getid()
     endif
 endfunction
+
+" git blamer
+let g:blamer_enabled = 1
+let g:blamer_delay = 500

@@ -221,12 +221,29 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Left> <C-w><
 
 " neovim terminal Esc key mapping
-" nnoremap <Leader>sh :belowright split term://zsh<CR>
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
-endif
+" if has('nvim')
+  " tnoremap <Esc> <C-\><C-n>
+  " tnoremap <M-[> <Esc>
+  " tnoremap <C-v><Esc> <Esc>
+" endif
+function s:AddTerminalNavigation()
+
+    echom &filetype
+    if &filetype ==# ''
+        tnoremap <buffer> <silent> <c-h> <c-\><c-n>:TmuxNavigateLeft<cr>
+        tnoremap <buffer> <silent> <c-j> <c-\><c-n>:TmuxNavigateDown<cr>
+        tnoremap <buffer> <silent> <c-k> <c-\><c-n>:TmuxNavigateUp<cr>
+        tnoremap <buffer> <silent> <c-l> <c-\><c-n>:TmuxNavigateRight<cr>
+        tnoremap <Esc> <C-\><C-n>
+        tnoremap <C-v><Esc> <Esc>
+    endif
+
+endfunction
+
+augroup TerminalNavigation
+    autocmd!
+    autocmd TermEnter * call s:AddTerminalNavigation()
+augroup END 
 
 " clipboard setting
 "See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard

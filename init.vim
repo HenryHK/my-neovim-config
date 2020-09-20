@@ -33,6 +33,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'APZelos/blamer.nvim'
@@ -93,6 +94,9 @@ Plug 'tpope/vim-obsession'
 Plug 'morhetz/gruvbox'
 " wakatime
 Plug 'wakatime/vim-wakatime'
+
+" floatterm
+Plug 'voldikss/vim-floaterm'
 
 " end of plugins settings
 call plug#end()
@@ -419,3 +423,15 @@ endfunction
 " git blamer
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
+
+" floatterm
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1

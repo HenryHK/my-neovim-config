@@ -268,6 +268,13 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" abbrevation for command function
+function! SetupCommandAbbrs(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
 " plugin settings 
 " vim-plug
 " install plugin using vim-plug
@@ -305,17 +312,7 @@ endif
 
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
-" Go highlight
-" let g:go_highlight_build_constraints = 1
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_fields = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_structs = 1
-" let g:go_highlight_types = 1
-" let g:go_auto_sameids = 1
-" import when format
+autocmd BufWritePre *.go :GoMetaLinter
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 " add json tags automatically
@@ -375,22 +372,12 @@ command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': functio
 let $BAT_THEME = 'TwoDark'
 let $FZF_PREVIEW_COMMAND = 'bat --color=always {} || cat {} || tree -C {}'
 let g:fzf_layout = { 'down': '~50%' }
-" command! -bang -nargs=* Rg
-  " \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
-  " \ 1,
-  " \ fzf#vim#with_preview(),
-  " \ <bang>0)
 " fzf now has Rg command built in
 nnoremap <silent> <Leader>f :Rg<CR>
 
 " coc.nvim
 " coc configuration
 let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
-function! SetupCommandAbbrs(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfunction
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
 
@@ -409,33 +396,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>p  <Plug>(coc-format-selected)
 nmap <leader>p  <Plug>(coc-format-selected)
-
-" coc terminal
-tnoremap <silent> <C-s> <C-\><C-n>:call ToggleTerminal(12)<Enter>
-nnoremap <silent> <C-s> :call ToggleTerminal(12)<Enter>
-
-" Terminal Function
-let g:term_buf = 0
-let g:term_win = 0
-function! ToggleTerminal(height)
-    if win_gotoid(g:term_win)
-        hide
-    else
-        botright new
-        exec "resize " . a:height
-        try
-            exec "buffer " . g:term_buf
-        catch
-            call termopen($SHELL, {"detach": 0})
-            let g:term_buf = bufnr("")
-            set nonumber
-            set norelativenumber
-            set signcolumn=no
-        endtry
-        startinsert!
-        let g:term_win = win_getid()
-    endif
-endfunction
 
 " git blamer
 let g:blamer_enabled = 1

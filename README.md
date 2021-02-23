@@ -46,9 +46,9 @@ In my work we use two spaces as indentation, so feel free to change it if you pr
 
 Not all plugins I installed are required for JS development but I found it works for me.
 
-Sometimes syntax highlighting has issues with complicated string templates.
+Sometimes syntax highlighting has issues with complicated string templates. (fixed by remove limits on syntax columns)
 
-The TS/JS LSP works like a charm, the only shortcuts I use in my daily development is
+The TS/JS LSP works like a charm, the only shortcut I use in my daily development is
 ```
 * <F12>: Go to definition
 ```
@@ -107,6 +107,8 @@ I'm used to work with git in commandline. But I found it handy to access some gi
 
 the status in gutter is provided by `vim-gitgutter`.
 
+I recommend `lazygit`, a complete TUI git management tool written in Golang.
+
 ### Buffer, Pane, Tab, etc.
 
 Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.
@@ -146,6 +148,16 @@ nnoremap <S-Left> <C-w><
 ### Terminal
 
 Use `floaterm`, it's soooooooo good
+```
+" toggle terminal
+let g:floaterm_keymap_toggle = '<F1>'
+" prev terminal
+let g:floaterm_keymap_prev   = '<F2>'
+" next terminal
+let g:floaterm_keymap_next   = '<F3>'
+" create a new terminal in floaterm
+let g:floaterm_keymap_new    = '<F4>'
+```
 
 ## License
 MIT

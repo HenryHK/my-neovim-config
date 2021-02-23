@@ -145,7 +145,7 @@ nnoremap <S-Left> <C-w><
 
 ### Terminal
 
-Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)
+Use `floaterm`, it's soooooooo good
 
 ## License
 MIT

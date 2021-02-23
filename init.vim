@@ -48,10 +48,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Use coc instead of old ycm
 " Use release branch
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Or latest tag
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-" Or build from source code by use yarn: https://yarnpkg.com
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " rainbow parentheses improved
 Plug 'luochen1990/rainbow'
@@ -312,7 +308,7 @@ endif
 
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
-autocmd BufWritePre *.go :GoMetaLinter
+" autocmd BufWritePost *.go :GoMetaLinter
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 " add json tags automatically
@@ -377,7 +373,7 @@ nnoremap <silent> <Leader>f :Rg<CR>
 
 " coc.nvim
 " coc configuration
-let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
+" let g:coc_node_path='/Users/lhan/.nvm/versions/node/v10.15.3/bin/node'
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
 
